@@ -17,7 +17,7 @@ const IsRegisteredComp = () => {
           onClick={handleIsRegistered}
           className="cursor-pointer text-primary"
         >
-          {isRegistered ? "Login" : "Register"}
+          {isRegistered ? "Register" : "Login"}
         </span>
       </p>
     </div>

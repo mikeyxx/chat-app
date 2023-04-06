@@ -9,10 +9,40 @@ import {
 } from "../errors/index.js";
 
 export const register = async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    userName,
+    email,
+    password,
+    friends,
+    picturePath,
+    location,
+    bio,
+  } = req.body;
+
+  console.log(req.files);
+
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
-  const user = await User.create({ ...req.body, password: hashedPassword });
-  res.status(201).json(user);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  const newUser = new User({
+    firstName,
+    lastName,
+    userName,
+    email,
+    password: hashedPassword,
+    friends,
+    picturePath,
+    location,
+    bio,
+    viewedProfile: Math.floor(Math.random() * 10000),
+    impressions: Math.floor(Math.random() * 10000),
+  });
+
+  const savedUser = await newUser.save();
+
+  res.status(201).json(savedUser);
 };
 
 export const login = async (req, res) => {
@@ -38,7 +68,36 @@ export const login = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_DURATION }
   );
-  res
-    .status(StatusCodes.OK)
-    .json({ name: user.firstName, username: user.userName, token });
+  delete user.password;
+
+  const {
+    _id,
+    firstName,
+    lastName,
+    email,
+    friends,
+    picturePath,
+    location,
+    bio,
+    viewedProfile,
+    impressions,
+  } = user;
+
+  const formattedUserData = {
+    _id,
+    firstName,
+    lastName,
+    email,
+    friends,
+    picturePath,
+    location,
+    bio,
+    viewedProfile,
+    impressions,
+  };
+  res.status(StatusCodes.OK).json({
+    firstName,
+    formattedUserData,
+    token,
+  });
 };

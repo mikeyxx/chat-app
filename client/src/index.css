@@ -23,6 +23,6 @@ body {
     @apply gap-8;
   }
   .logout {
-    @apply absolute inline-block bg-red-500 text-white w-24 text-center rounded top-16 right-[90px];
+    @apply absolute flex flex-col w-24 text-center rounded top-16 right-[90px] shadow-2xl;
   }
 }

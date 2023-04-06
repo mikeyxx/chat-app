@@ -1,8 +1,14 @@
+import { useAppSelector } from "../app/store";
 import Person from "../assets/p3.jpeg";
 
 const FriendsList = () => {
+  const { mode } = useAppSelector((state) => state.users);
   return (
-    <div className="mt-4 flex flex-col bg-white w-full rounded-xl p-4">
+    <div
+      className={`
+    ${mode === "light" ? "bg-white" : "bg-gray-800"}
+    mt-4 flex flex-col w-full rounded-xl p-4`}
+    >
       <h3 className="font-bold">Friends List</h3>
       <div className="flex w-full items-center justify-between mt-3">
         <div className="flex sm-gap">

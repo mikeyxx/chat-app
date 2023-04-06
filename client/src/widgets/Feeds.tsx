@@ -4,11 +4,77 @@ import { RiFileGifLine } from "react-icons/ri";
 import { TfiClip } from "react-icons/tfi";
 import { AiFillAudio } from "react-icons/ai";
 import Posts from "./Posts";
+import { useAppDispatch, useAppSelector } from "../app/store";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { setFeeds } from "../feature/state";
 
 const Feeds = () => {
+  const { mode, token } = useAppSelector((state) => state.users);
+  const dispatch = useAppDispatch();
+  const [postData, setPostData] = useState({
+    description: "",
+    picturePath: "",
+  });
+
+  const handlePhotoAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    const picturePath = URL.createObjectURL(file);
+    setPostData({ ...postData, picturePath });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const formData = new FormData();
+      formData.append("description", postData.description);
+      formData.append("picturePath", postData.picturePath);
+
+      const { data } = await axios.post(
+        "http://localhost:3003/posts",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setPostData({
+        description: "",
+        picturePath: "",
+      });
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
+
+  const getPostFeeds = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:3003/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(setFeeds(data));
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getPostFeeds();
+  }, [postData]);
+
   return (
     <div className="flex flex-col flex-1 grow-[2] max-h-fit h-full mb-3">
-      <div className="flex flex-col bg-white w-full rounded-xl p-4 items-center justify-between  ">
+      <div
+        className={`
+        ${mode === "light" ? "bg-white" : "bg-gray-800"}
+      flex flex-col w-full rounded-xl p-4 items-center justify-between  `}
+      >
         <div className="flex items-center justify-between w-full sm-gap">
           <img
             src={person}
@@ -17,33 +83,63 @@ const Feeds = () => {
           />
           <input
             type="text"
+            name="description"
+            value={postData.description}
+            onChange={(e) =>
+              setPostData({ ...postData, description: e.target.value })
+            }
             placeholder="What's on your mind?"
-            className="bg-slate-100 w-full h-[50px] rounded-3xl p-4 focus:outline-primary"
+            className="bg-slate-100 w-full h-[50px] rounded-3xl p-4 focus:outline-primary text-black"
           />
         </div>
         <hr className="inline-block w-full m-5" />
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl">
-            <BsImage />
-            <small>Image</small>
+        <form
+          className="flex items-center justify-between w-full"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
+            <label htmlFor="picturePath" className="flex items-center gap-1">
+              {postData.picturePath === "" ? (
+                <div className="flex items-center gap-1">
+                  <BsImage />
+                  <small>Image</small>
+                </div>
+              ) : (
+                <span className="text-sm bg-slate-200 px-1 rounded-xl">
+                  Image Uploaded
+                </span>
+              )}
+            </label>
+            <input
+              type="file"
+              name="picturePath"
+              id="picturePath"
+              hidden
+              onChange={handlePhotoAdd}
+            />
           </div>
-          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl">
+          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
             <RiFileGifLine />
             <small>Clip</small>
           </div>
-          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl">
+          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
             <TfiClip />
             <small>Attachment</small>
           </div>
-          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl">
+          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
             <AiFillAudio />
             <small>Audio</small>
           </div>
-          <button className="bg-primary py-1 px-4 rounded-2xl font-bold hover:bg-slate-300">
+          <button
+            className="bg-primary py-1 px-4 rounded-2xl font-bold hover:bg-slate-300"
+            type="submit"
+          >
             Post
           </button>
-        </div>
+        </form>
       </div>
+
       <Posts />
     </div>
   );

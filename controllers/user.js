@@ -1,40 +1,12 @@
 import User from "../models/User.js";
-import Post from "../models/Post.js";
-import UserProfile from "../models/UserProfileInfo.js";
 import { StatusCodes } from "http-status-codes";
 import { BadRequestError, Not_Found } from "../errors/index.js";
 
-export const createUserProfile = async (req, res) => {
-  try {
-    const { userId } = req.user;
-
-    const post = await Post.find({ userId });
-
-    const user = await User.findById(userId);
-
-    const userProfileData = new UserProfile({
-      firstName: user.firstName,
-      userName: user.userName,
-      bio: user.bio,
-      picturePath: user.picturePath,
-      location: user.location,
-      dob: user.dob,
-      post: post,
-      media: post.picturePath,
-    });
-
-    const userProfile = await userProfileData.save();
-    res.status(StatusCodes.CREATED).json(userProfile);
-  } catch (error) {
-    throw new BadRequestError("User profile not created");
-  }
-};
-
 export const getUserProfile = async (req, res) => {
   try {
-    const { userId } = req.user;
-    const userData = await UserProfile.find({ userId });
-    res.status(StatusCodes.OK).json(userData);
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.status(StatusCodes.OK).json(user);
   } catch (error) {
     throw new Not_Found("User not found");
   }
@@ -50,8 +22,26 @@ export const getUserFriends = async (req, res) => {
     );
 
     const formattedFriends = friends.map((f) => {
-      const { _id, firstName, lastName, bio, dob, location, picturePath } = f;
-      return { _id, firstName, lastName, bio, dob, location, picturePath };
+      const {
+        _id,
+        firstName,
+        lastName,
+        bio,
+        viewedProfile,
+        impressions,
+        location,
+        picturePath,
+      } = f;
+      return {
+        _id,
+        firstName,
+        lastName,
+        bio,
+        viewedProfile,
+        impressions,
+        location,
+        picturePath,
+      };
     });
 
     res.status(StatusCodes.OK).json(formattedFriends);
@@ -78,8 +68,26 @@ export const addOrRemoveFriend = async (req, res) => {
     );
 
     const formattedFriends = friends.map((f) => {
-      const { _id, firstName, lastName, bio, dob, location, picturePath } = f;
-      return { _id, firstName, lastName, bio, dob, location, picturePath };
+      const {
+        _id,
+        firstName,
+        lastName,
+        bio,
+        viewedProfile,
+        impressions,
+        location,
+        picturePath,
+      } = f;
+      return {
+        _id,
+        firstName,
+        lastName,
+        bio,
+        viewedProfile,
+        impressions,
+        location,
+        picturePath,
+      };
     });
 
     res.status(StatusCodes.OK).json(formattedFriends);

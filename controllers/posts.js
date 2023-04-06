@@ -40,7 +40,7 @@ export const getAllFeeds = async (req, res) => {
   }
 };
 
-export const getSinglePost = async (req, res) => {
+export const getUserPosts = async (req, res) => {
   try {
     const { id } = req.params;
 

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Post {
+export interface Post {
+  _id: string;
   userId: string;
   firstName: string;
   lastName: string;
@@ -12,20 +13,49 @@ interface Post {
   comments: null;
 }
 
+export interface Friends {
+  _id: string;
+  firstName: string;
+}
+
+interface UserProfile {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  bio: string;
+  picturePath: string;
+  location: string;
+  dob: string;
+  friends: Friends[];
+  viewedProfile: number;
+  impressions: number;
+}
+
 interface UserState {
   mode: string;
-  user: string | null;
+  uName: string | null;
   token: string | null;
   isRegistered: boolean;
   posts: Post[];
+  post: Post | null;
+  userProfileData: UserProfile | null;
 }
+
+const info = localStorage.getItem("user");
+const userData = info !== null ? JSON.parse(info) : "";
+
+// const bg = localStorage.getItem("mode")
+// const bgColor = bg !== null ? JSON.parse(bg) : ""
 
 const initialState: UserState = {
   mode: "light",
-  user: null,
-  token: null,
+  uName: userData.userFirstName,
+  token: userData.token,
   isRegistered: true,
   posts: [],
+  post: null,
+  userProfileData: userData.user,
 };
 
 const UserSlice = createSlice({
@@ -39,11 +69,47 @@ const UserSlice = createSlice({
       state.isRegistered = !state.isRegistered;
     },
     isLoggedIn: (state, action) => {
-      state.user = action.payload.user;
       state.token = action.payload.token;
+      state.uName = action.payload.userFirstName;
+      state.userProfileData = action.payload.user;
+    },
+    setPost: (state, action) => {
+      state.posts = [...action.payload];
+    },
+    setSinglePost: (state, action) => {
+      state.post = action.payload;
+    },
+    setFeeds: (state, action) => {
+      state.posts = action.payload;
+    },
+    setUserProfile: (state, action) => {
+      state.userProfileData = action.payload;
+    },
+    setFriends: (state, action) => {
+      if (state.userProfileData) {
+        state.userProfileData.friends = action.payload.friends;
+      } else {
+        console.log("User friend does not exist");
+      }
+    },
+    isLoggedOut: (state) => {
+      state.token = null;
+      state.uName = null;
+      state.posts = [];
+      state.userProfileData = null;
     },
   },
 });
 
-export const { setIsRegistered, isLoggedIn } = UserSlice.actions;
+export const {
+  setMode,
+  setIsRegistered,
+  isLoggedIn,
+  setPost,
+  setFeeds,
+  setUserProfile,
+  setSinglePost,
+  setFriends,
+  isLoggedOut,
+} = UserSlice.actions;
 export default UserSlice.reducer;
