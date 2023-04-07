@@ -16,6 +16,9 @@ export interface Post {
 export interface Friends {
   _id: string;
   firstName: string;
+  lastName: string;
+  picturePath: string;
+  bio: string;
 }
 
 interface UserProfile {
@@ -40,6 +43,7 @@ interface UserState {
   posts: Post[];
   post: Post | null;
   userProfileData: UserProfile | null;
+  isLiked: boolean;
 }
 
 const info = localStorage.getItem("user");
@@ -56,6 +60,7 @@ const initialState: UserState = {
   posts: [],
   post: null,
   userProfileData: userData.user,
+  isLiked: false,
 };
 
 const UserSlice = createSlice({
@@ -92,6 +97,14 @@ const UserSlice = createSlice({
         console.log("User friend does not exist");
       }
     },
+    setUpdatedPost: (state, action) => {
+      const updatedPost = state.posts.map((post) => {
+        if (post._id === action.payload._id) return action.payload.post;
+        return post;
+      });
+      state.posts = updatedPost;
+      state.isLiked = !state.isLiked;
+    },
     isLoggedOut: (state) => {
       state.token = null;
       state.uName = null;
@@ -110,6 +123,7 @@ export const {
   setUserProfile,
   setSinglePost,
   setFriends,
+  setUpdatedPost,
   isLoggedOut,
 } = UserSlice.actions;
 export default UserSlice.reducer;

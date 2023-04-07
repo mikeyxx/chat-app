@@ -10,7 +10,9 @@ import axios from "axios";
 import { setFeeds } from "../feature/state";
 
 const Feeds = () => {
-  const { mode, token } = useAppSelector((state) => state.users);
+  const { mode, token, posts, isLiked } = useAppSelector(
+    (state) => state.users
+  );
   const dispatch = useAppDispatch();
   const [postData, setPostData] = useState({
     description: "",
@@ -66,7 +68,7 @@ const Feeds = () => {
 
   useEffect(() => {
     getPostFeeds();
-  }, [postData]);
+  }, [postData, isLiked]);
 
   return (
     <div className="flex flex-col flex-1 grow-[2] max-h-fit h-full mb-3">
@@ -139,8 +141,9 @@ const Feeds = () => {
           </button>
         </form>
       </div>
-
-      <Posts />
+      {posts.map((post) => (
+        <Posts key={post._id} post={post} />
+      ))}
     </div>
   );
 };

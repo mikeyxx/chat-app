@@ -1,4 +1,5 @@
 import { BiHeart, BiComment } from "react-icons/bi";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineShare } from "react-icons/md";
 import { useAppSelector } from "../app/store";
 import Person from "../assets/p3.jpeg";
@@ -6,6 +7,23 @@ import Eat from "../assets/post1.jpeg";
 
 const SinglePost = () => {
   const { mode, post } = useAppSelector((state) => state.users);
+  const _id = useAppSelector((state) => state.users.userProfileData?._id);
+
+  const checkIsLiked = () => {
+    let isLiked = false;
+    if (post?.likes) {
+      isLiked = Boolean(post.likes[String(_id)]);
+    }
+    return isLiked;
+  };
+
+  const checkLikeCount = () => {
+    let likeCount;
+    if (post?.likes) {
+      likeCount = Object.keys(post.likes).length;
+    }
+    return likeCount;
+  };
 
   return (
     <div
@@ -29,17 +47,20 @@ const SinglePost = () => {
             <small>{post?.location}</small>
           </div>
         </div>
-        <small className="text-primary cursor-pointer hover:bg-slate-100 px-3 rounded-xl">
-          Follow
-        </small>
       </div>
       <p className="my-4">{post?.description}</p>
       <img src={Eat} alt="" className="rounded-xl" />
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center lg-gap mt-2">
           <div className="flex items-center sm-gap">
-            <BiHeart className="cursor-pointer" />
-            <span>0</span>
+            <div>
+              {checkIsLiked() ? (
+                <IoMdHeart className="cursor-pointer text-green-400" />
+              ) : (
+                <IoMdHeartEmpty className="cursor-pointer" />
+              )}
+            </div>
+            <span>{checkLikeCount()}</span>
           </div>
           <div className="flex items-center sm-gap">
             <BiComment className="cursor-pointer" />

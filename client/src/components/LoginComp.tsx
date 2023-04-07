@@ -26,7 +26,6 @@ const LoginComp = () => {
         userName,
         password,
       });
-      console.log(data);
       dispatch(
         isLoggedIn({
           userFirstName: data.firstName,

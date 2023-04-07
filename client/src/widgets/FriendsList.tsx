@@ -1,8 +1,36 @@
-import { useAppSelector } from "../app/store";
+import { useAppSelector, useAppDispatch } from "../app/store";
+import axios from "axios";
 import Person from "../assets/p3.jpeg";
+import { setFriends } from "../feature/state";
+import { useEffect } from "react";
 
 const FriendsList = () => {
-  const { mode } = useAppSelector((state) => state.users);
+  const { mode, token, userProfileData } = useAppSelector(
+    (state) => state.users
+  );
+  const _id = useAppSelector((state) => state.users.userProfileData?._id);
+  const dispatch = useAppDispatch();
+
+  const getFriends = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3003/users/${_id}/friends`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setFriends({ friends: data }));
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getFriends();
+  }, [userProfileData?.friends.length]);
+
   return (
     <div
       className={`
@@ -10,23 +38,30 @@ const FriendsList = () => {
     mt-4 flex flex-col w-full rounded-xl p-4`}
     >
       <h3 className="font-bold">Friends List</h3>
-      <div className="flex w-full items-center justify-between mt-3">
-        <div className="flex sm-gap">
-          <img
-            src={Person}
-            alt=""
-            className="w-[40px] h-[40px] object-cover rounded-[50%] "
-          />
+      {userProfileData?.friends.map((friend) => (
+        <div
+          key={friend._id}
+          className="flex w-full items-center justify-between mt-3"
+        >
+          <div className="flex sm-gap">
+            <img
+              src={Person}
+              alt=""
+              className="w-[40px] h-[40px] object-cover rounded-[50%]"
+            />
 
-          <div className="flex flex-col">
-            <span className="font-bold text-sm">Ellu P</span>
-            <small className="text-xs">Lagos, Nigeria</small>
+            <div className="flex flex-col">
+              <span className="font-bold text-sm">
+                {friend.firstName} {friend.lastName}
+              </span>
+              <small className="text-xs">{friend.bio}</small>
+            </div>
           </div>
+          <small className="text-primary cursor-pointer hover:bg-slate-100 px-3 rounded-xl">
+            Following
+          </small>
         </div>
-        <small className="text-primary cursor-pointer hover:bg-slate-100 px-3 rounded-xl">
-          Following
-        </small>
-      </div>
+      ))}
     </div>
   );
 };

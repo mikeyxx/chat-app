@@ -18,7 +18,14 @@ const UserProfile = ({ userId }: Props) => {
   );
   const dispatch = useAppDispatch();
 
-  console.log(userProfileData?.friends);
+  const checkNumOfFriends = () => {
+    let numOfFriends;
+    if (userProfileData?.friends) {
+      numOfFriends = userProfileData?.friends.length > 1 ? "Friends" : "Friend";
+    }
+
+    return numOfFriends;
+  };
 
   const getUserProfile = async () => {
     try {
@@ -59,7 +66,9 @@ const UserProfile = ({ userId }: Props) => {
               <span className="font-bold">
                 {userProfileData?.firstName} {userProfileData?.lastName}
               </span>
-              <small>0 friends</small>
+              <small>
+                {userProfileData?.friends.length} {checkNumOfFriends()}
+              </small>
             </div>
           </div>
           <MdPersonAddAlt className="hover:bg-slate-100 rounded-xl cursor-pointer w-6 h-6 p-1" />
