@@ -9,9 +9,10 @@ import axios from "axios";
 import { setFeeds } from "../feature/state";
 
 const Feeds = () => {
-  const { mode, token, posts, isLiked, userProfileData } = useAppSelector(
+  const { token, posts, isLiked, userProfileData } = useAppSelector(
     (state) => state.users
   );
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
   const dispatch = useAppDispatch();
   const [postData, setPostData] = useState({
     description: "",
@@ -68,13 +69,19 @@ const Feeds = () => {
     getPostFeeds();
   }, [postData, isLiked]);
 
+  useEffect(() => {
+    const handleScreenSize = () => {
+      setScreenSize(window.innerWidth);
+    };
+    window.addEventListener("resize", handleScreenSize);
+    return () => {
+      window.removeEventListener("resize", handleScreenSize);
+    };
+  }, [screenSize]);
+
   return (
     <div className="flex flex-col flex-1 grow-[2] max-h-fit h-full mb-3">
-      <div
-        className={`
-        ${mode === "light" ? "bg-white" : "bg-gray-800"}
-      flex flex-col w-full rounded-xl p-4 items-center justify-between  `}
-      >
+      <div className="comps flex flex-col w-full rounded-xl p-4 items-center justify-between">
         <div className="flex items-center justify-between w-full sm-gap">
           <img
             src={userProfileData?.picturePath}
@@ -119,10 +126,12 @@ const Feeds = () => {
               onChange={handlePhotoAdd}
             />
           </div>
-          <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
-            <RiFileGifLine />
-            <small>Clip</small>
-          </div>
+          {screenSize > 420 && (
+            <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
+              <RiFileGifLine />
+              <small>Clip</small>
+            </div>
+          )}
           <div className="flex items-center gap-1 cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
             <TfiClip />
             <small>Attachment</small>

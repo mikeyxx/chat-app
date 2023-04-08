@@ -4,7 +4,7 @@ import { MdOutlineShare } from "react-icons/md";
 import { useAppSelector } from "../app/store";
 
 const SinglePost = () => {
-  const { mode, post } = useAppSelector((state) => state.users);
+  const { post } = useAppSelector((state) => state.users);
   const _id = useAppSelector((state) => state.users.userProfileData?._id);
 
   const checkIsLiked = () => {
@@ -24,12 +24,7 @@ const SinglePost = () => {
   };
 
   return (
-    <div
-      className={`
-    ${
-      mode === "light" ? "bg-white" : "bg-gray-800"
-    } flex flex-col w-full rounded-xl p-4`}
-    >
+    <div className="comps flex flex-col w-full max-h-fit h-full rounded-xl p-4">
       <div className="flex w-full items-center justify-between">
         <div className="flex sm-gap">
           <img

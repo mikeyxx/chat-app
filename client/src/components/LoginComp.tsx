@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import IsRegisteredComp from "./IsRegisteredComp";
 import axios from "axios";
-import { useAppDispatch } from "../app/store";
+import { useAppDispatch, useAppSelector } from "../app/store";
 import { isLoggedIn } from "../feature/state";
 import { useNavigate } from "react-router-dom";
 
 const LoginComp = () => {
+  const { mode } = useAppSelector((state) => state.users);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [userData, setUserData] = useState({
@@ -47,9 +48,10 @@ const LoginComp = () => {
       console.log(error.message);
     }
   };
+
   return (
     <div className="pt-28">
-      <div className="bg-white flex items-center justify-center  max-w-xl m-auto rounded-xl ">
+      <div className=" comps flex items-center justify-center  max-w-xl m-auto rounded-xl ">
         <div className="w-full p-4">
           <h1 className="mt-4 mb-6">ChirpChat! Keep the Conversation Going.</h1>
           <form className="w-full flex flex-col lg-gap" onSubmit={handleSubmit}>
@@ -58,7 +60,7 @@ const LoginComp = () => {
               name="userName"
               value={userData.userName}
               placeholder="Username"
-              className="border w-full rounded h-10 p-2 focus:outline-primary"
+              className="border w-full rounded h-10 p-2 focus:outline-primary text-black"
               onChange={handleChange}
             />
 
@@ -67,7 +69,7 @@ const LoginComp = () => {
               name="password"
               value={userData.password}
               placeholder="Password"
-              className="border w-full rounded h-10 p-2 focus:outline-primary"
+              className="border w-full rounded h-10 p-2 focus:outline-primary text-black"
               onChange={handleChange}
             />
 

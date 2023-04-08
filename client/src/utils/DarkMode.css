@@ -1,0 +1,22 @@
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+  --comp-background: #fff;
+}
+
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: black;
+  --comp-background: #1f2937;
+  --comp-color: #fff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
+}
+
+.comps {
+  background-color: var(--comp-background);
+  color: var(--comp-color);
+}

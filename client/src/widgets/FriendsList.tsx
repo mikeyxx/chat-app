@@ -31,11 +31,7 @@ const FriendsList = () => {
   }, [userProfileData?.friends.length]);
 
   return (
-    <div
-      className={`
-    ${mode === "light" ? "bg-white" : "bg-gray-800"}
-    mt-4 flex flex-col w-full rounded-xl p-4`}
-    >
+    <div className=" comps mt-4 flex flex-col w-full rounded-xl p-4">
       <h3 className="font-bold">Friends List</h3>
       {userProfileData?.friends.map((friend) => (
         <div

@@ -5,7 +5,7 @@ import LinkedIn from "../assets/linkedin.png";
 import { useAppSelector, useAppDispatch } from "../app/store";
 import { setUserProfile } from "../feature/state";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   userId: string | undefined;
@@ -15,6 +15,8 @@ const UserProfile = ({ userId }: Props) => {
   const { mode, token, userProfileData } = useAppSelector(
     (state) => state.users
   );
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+
   const dispatch = useAppDispatch();
 
   const checkNumOfFriends = () => {
@@ -46,12 +48,22 @@ const UserProfile = ({ userId }: Props) => {
     getUserProfile();
   }, [userId]);
 
+  useEffect(() => {
+    const handleScreenSize = () => {
+      setScreenSize(window.innerWidth);
+    };
+    window.addEventListener("resize", handleScreenSize);
+    return () => {
+      window.removeEventListener("resize", handleScreenSize);
+    };
+  }, [screenSize]);
+
   return (
     <>
       <div
-        className={` 
-      ${mode === "light" ? "bg-white" : "bg-gray-800"}
-      flex flex-col w-full p-4 max-w-[390px] rounded-xl max-h-fit h-full`}
+        className={`comps flex flex-col ${
+          screenSize > 920 && "max-w-[390px]"
+        } w-full p-4 rounded-xl max-h-fit h-full`}
       >
         <div className="flex w-full items-center justify-between">
           <div className="flex sm-gap">

@@ -11,10 +11,6 @@ body,
   font-family: "Rubik", sans-serif;
 }
 
-body {
-  background-color: #f2f2f2;
-}
-
 @layer components {
   .sm-gap {
     @apply gap-3;
@@ -23,6 +19,6 @@ body {
     @apply gap-8;
   }
   .logout {
-    @apply absolute flex flex-col w-24 text-center rounded top-16 right-[90px] shadow-2xl;
+    @apply flex flex-col text-center rounded shadow-2xl w-24 items-center justify-center h-24 bg-white text-black gap-2;
   }
 }

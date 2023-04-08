@@ -12,9 +12,7 @@ interface Props {
 }
 
 const Posts = ({ post }: Props) => {
-  const { mode, token, userProfileData } = useAppSelector(
-    (state) => state.users
-  );
+  const { token, userProfileData } = useAppSelector((state) => state.users);
   const _id = useAppSelector((state) => state.users.userProfileData?._id);
 
   const isFriend = userProfileData?.friends.find(
@@ -82,16 +80,8 @@ const Posts = ({ post }: Props) => {
     }
   };
 
-  console.log("User " + post.userPicturePath);
-  console.log("User " + userProfileData?.picturePath);
-  console.log("Post " + post.picturePath);
-
   return (
-    <div
-      className={`
-    ${mode === "light" ? "bg-white" : "bg-gray-800"}
-    mt-4 flex flex-col w-full rounded-xl p-4`}
-    >
+    <div className="comps mt-4 flex flex-col w-full rounded-xl p-4">
       <div className="flex w-full items-center justify-between">
         <div className="flex sm-gap">
           <img

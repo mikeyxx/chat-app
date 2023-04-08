@@ -36,7 +36,7 @@ interface UserProfile {
 }
 
 interface UserState {
-  mode: string;
+  mode: string | null;
   uName: string | null;
   token: string | null;
   isRegistered: boolean;
@@ -49,11 +49,10 @@ interface UserState {
 const info = localStorage.getItem("user");
 const userData = info !== null ? JSON.parse(info) : "";
 
-// const bg = localStorage.getItem("mode")
-// const bgColor = bg !== null ? JSON.parse(bg) : ""
+const storedTheme = localStorage.getItem("mode");
 
 const initialState: UserState = {
-  mode: "light",
+  mode: storedTheme,
   uName: userData.userFirstName,
   token: userData.token,
   isRegistered: true,
