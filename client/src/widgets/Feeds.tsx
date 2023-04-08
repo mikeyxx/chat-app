@@ -1,4 +1,3 @@
-import person from "../assets/p3.jpeg";
 import { BsImage } from "react-icons/bs";
 import { RiFileGifLine } from "react-icons/ri";
 import { TfiClip } from "react-icons/tfi";
@@ -10,7 +9,7 @@ import axios from "axios";
 import { setFeeds } from "../feature/state";
 
 const Feeds = () => {
-  const { mode, token, posts, isLiked } = useAppSelector(
+  const { mode, token, posts, isLiked, userProfileData } = useAppSelector(
     (state) => state.users
   );
   const dispatch = useAppDispatch();
@@ -28,7 +27,6 @@ const Feeds = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       const formData = new FormData();
       formData.append("description", postData.description);
@@ -79,7 +77,7 @@ const Feeds = () => {
       >
         <div className="flex items-center justify-between w-full sm-gap">
           <img
-            src={person}
+            src={userProfileData?.picturePath}
             alt=""
             className="w-[57px] h-[50px] object-cover rounded-[50%] "
           />

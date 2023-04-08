@@ -1,6 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../app/store";
 import axios from "axios";
-import Person from "../assets/p3.jpeg";
 import { setFriends } from "../feature/state";
 import { useEffect } from "react";
 
@@ -45,7 +44,7 @@ const FriendsList = () => {
         >
           <div className="flex sm-gap">
             <img
-              src={Person}
+              src={friend.picturePath}
               alt=""
               className="w-[40px] h-[40px] object-cover rounded-[50%]"
             />

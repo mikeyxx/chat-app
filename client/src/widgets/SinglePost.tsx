@@ -1,9 +1,7 @@
-import { BiHeart, BiComment } from "react-icons/bi";
+import { BiComment } from "react-icons/bi";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineShare } from "react-icons/md";
 import { useAppSelector } from "../app/store";
-import Person from "../assets/p3.jpeg";
-import Eat from "../assets/post1.jpeg";
 
 const SinglePost = () => {
   const { mode, post } = useAppSelector((state) => state.users);
@@ -35,7 +33,7 @@ const SinglePost = () => {
       <div className="flex w-full items-center justify-between">
         <div className="flex sm-gap">
           <img
-            src={Person}
+            src={post?.userPicturePath}
             alt=""
             className="w-[50px] h-[50px] object-cover rounded-[50%]"
           />
@@ -49,7 +47,7 @@ const SinglePost = () => {
         </div>
       </div>
       <p className="my-4">{post?.description}</p>
-      <img src={Eat} alt="" className="rounded-xl" />
+      <img src={post?.picturePath} alt="" className="rounded-xl" />
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center lg-gap mt-2">
           <div className="flex items-center sm-gap">

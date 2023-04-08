@@ -2,8 +2,6 @@ import { BiComment } from "react-icons/bi";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { MdOutlineShare } from "react-icons/md";
 import { useAppSelector, useAppDispatch } from "../app/store";
-import Person from "../assets/p3.jpeg";
-import Eat from "../assets/post1.jpeg";
 import { useNavigate } from "react-router-dom";
 import { Post, setSinglePost } from "../feature/state";
 import axios from "axios";
@@ -14,7 +12,7 @@ interface Props {
 }
 
 const Posts = ({ post }: Props) => {
-  const { mode, token, userProfileData, isLiked } = useAppSelector(
+  const { mode, token, userProfileData } = useAppSelector(
     (state) => state.users
   );
   const _id = useAppSelector((state) => state.users.userProfileData?._id);
@@ -38,8 +36,6 @@ const Posts = ({ post }: Props) => {
     }
     return likeCount;
   };
-
-  console.log(checkLikeCount());
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -86,6 +82,10 @@ const Posts = ({ post }: Props) => {
     }
   };
 
+  console.log("User " + post.userPicturePath);
+  console.log("User " + userProfileData?.picturePath);
+  console.log("Post " + post.picturePath);
+
   return (
     <div
       className={`
@@ -95,7 +95,7 @@ const Posts = ({ post }: Props) => {
       <div className="flex w-full items-center justify-between">
         <div className="flex sm-gap">
           <img
-            src={Person}
+            src={post.userPicturePath}
             alt=""
             className="w-[50px] h-[50px] object-cover rounded-[50%] "
           />
@@ -123,7 +123,7 @@ const Posts = ({ post }: Props) => {
         </small>
       </div>
       <p className="my-4">{post.description}</p>
-      <img src={Eat} alt="" className="rounded-xl" />
+      <img src={post.picturePath} alt="" className="rounded-xl" />
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center lg-gap mt-2">
           <div className="flex items-center sm-gap">

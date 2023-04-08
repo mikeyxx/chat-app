@@ -21,8 +21,6 @@ export const register = async (req, res) => {
     bio,
   } = req.body;
 
-  console.log(req.files);
-
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 

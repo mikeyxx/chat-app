@@ -1,6 +1,5 @@
 import { MdPersonAddAlt, MdOutlineLocationOn } from "react-icons/md";
 import { IoBriefcaseOutline } from "react-icons/io5";
-import person from "../assets/p3.jpeg";
 import Twitter from "../assets/twitter.png";
 import LinkedIn from "../assets/linkedin.png";
 import { useAppSelector, useAppDispatch } from "../app/store";
@@ -57,7 +56,7 @@ const UserProfile = ({ userId }: Props) => {
         <div className="flex w-full items-center justify-between">
           <div className="flex sm-gap">
             <img
-              src={person}
+              src={userProfileData?.picturePath}
               alt=""
               className="w-[50px] h-[50px] object-cover rounded-[50%] "
             />
