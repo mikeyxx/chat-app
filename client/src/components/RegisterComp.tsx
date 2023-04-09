@@ -27,8 +27,13 @@ const RegisterComp = () => {
   const handleAddPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
-    const picturePath = URL.createObjectURL(file);
-    setUserData({ ...userData, picturePath });
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const picturePath = reader.result as string;
+      setUserData({ ...userData, picturePath });
+    };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
