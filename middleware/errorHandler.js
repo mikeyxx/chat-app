@@ -1,5 +1,5 @@
-import CustomErrorHandler from "../errors/custom.js";
-import { StatusCodes } from "http-status-codes";
+const CustomErrorHandler = require("../errors/custom.js");
+const { StatusCodes } = require("http-status-codes");
 
 const errorHandlerMiddleWare = (err, req, res, next) => {
   if (err instanceof CustomErrorHandler) {
@@ -8,4 +8,4 @@ const errorHandlerMiddleWare = (err, req, res, next) => {
   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
 };
 
-export default errorHandlerMiddleWare;
+module.exports = errorHandlerMiddleWare;

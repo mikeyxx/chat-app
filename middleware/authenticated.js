@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import { UnauthenticatedError } from "../errors/index.js";
+const jwt = require("jsonwebtoken");
+const { UnauthenticatedError } = require("../errors/index.js");
 
 const authorized = (req, res, next) => {
   const authheader = req.headers.authorization || req.headers.authorization;
@@ -17,4 +17,4 @@ const authorized = (req, res, next) => {
   next();
 };
 
-export default authorized;
+module.exports = authorized;

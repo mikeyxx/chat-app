@@ -1,8 +1,8 @@
-import User from "../models/User.js";
-import { StatusCodes } from "http-status-codes";
-import { BadRequestError, Not_Found } from "../errors/index.js";
+const User = require("../models/User.js");
+const { StatusCodes } = require("http-status-codes");
+const { BadRequestError, Not_Found } = require("../errors/index.js");
 
-export const getUserProfile = async (req, res) => {
+const getUserProfile = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -12,7 +12,7 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
-export const getUserFriends = async (req, res) => {
+const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -50,7 +50,7 @@ export const getUserFriends = async (req, res) => {
   }
 };
 
-export const addOrRemoveFriend = async (req, res) => {
+const addOrRemoveFriend = async (req, res) => {
   try {
     const { id, friendId } = req.params;
     const user = await User.findById(id);
@@ -99,3 +99,5 @@ export const addOrRemoveFriend = async (req, res) => {
     throw new BadRequestError("Unable to add or remove friend");
   }
 };
+
+module.exports = { getUserProfile, getUserFriends, addOrRemoveFriend };
