@@ -1,5 +1,5 @@
-import CustomErrorHandler from "./custom.js";
-import { StatusCodes } from "http-status-codes";
+const CustomErrorHandler = require("./custom.js");
+const { StatusCodes } = require("http-status-codes");
 
 class Not_Found extends CustomErrorHandler {
   constructor(message) {
@@ -8,4 +8,4 @@ class Not_Found extends CustomErrorHandler {
   }
 }
 
-export default Not_Found;
+module.exports = Not_Found;

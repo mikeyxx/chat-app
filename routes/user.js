@@ -1,9 +1,9 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   addOrRemoveFriend,
   getUserFriends,
   getUserProfile,
-} from "../controllers/user.js";
+} = require("../controllers/user.js");
 const router = express.Router();
 
 router.route("/:id").get(getUserProfile);
@@ -12,4 +12,4 @@ router.route("/:id/friends").get(getUserFriends);
 
 router.route("/:id/:friendId").patch(addOrRemoveFriend);
 
-export default router;
+module.exports = router;

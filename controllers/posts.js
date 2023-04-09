@@ -1,9 +1,9 @@
-import Post from "../models/Post.js";
-import { StatusCodes } from "http-status-codes";
-import User from "../models/User.js";
-import { BadRequestError, Not_Found } from "../errors/index.js";
+const Post = require("../models/Post.js");
+const { StatusCodes } = require("http-status-codes");
+const User = require("../models/User.js");
+const { BadRequestError, Not_Found } = require("../errors/index.js");
 
-export const createPost = async (req, res) => {
+const createPost = async (req, res) => {
   try {
     const { userId } = req.user;
     const user = await User.findById(userId);
@@ -31,7 +31,7 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const getAllFeeds = async (req, res) => {
+const getAllFeeds = async (req, res) => {
   try {
     const post = await Post.find();
     res.status(StatusCodes.OK).json(post);
@@ -40,7 +40,7 @@ export const getAllFeeds = async (req, res) => {
   }
 };
 
-export const getUserPosts = async (req, res) => {
+const getUserPosts = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -51,7 +51,7 @@ export const getUserPosts = async (req, res) => {
   }
 };
 
-export const likePost = async (req, res) => {
+const likePost = async (req, res) => {
   try {
     const { id } = req.params;
     const { userId } = req.user;
@@ -72,3 +72,5 @@ export const likePost = async (req, res) => {
     throw new BadRequestError("Action not completed successfully");
   }
 };
+
+module.exports = { createPost, getAllFeeds, getUserPosts, likePost };

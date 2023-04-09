@@ -1,14 +1,14 @@
-import User from "../models/User.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { StatusCodes } from "http-status-codes";
-import {
+const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { StatusCodes } = require("http-status-codes");
+const {
   BadRequestError,
   Not_Found,
   UnauthenticatedError,
-} from "../errors/index.js";
+} = require("../errors/index.js");
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   const {
     firstName,
     lastName,
@@ -43,7 +43,7 @@ export const register = async (req, res) => {
   res.status(201).json(savedUser);
 };
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   const { userName, password } = req.body;
   if (!userName || !password) {
     throw new BadRequestError("Please provide email and password");
@@ -99,3 +99,5 @@ export const login = async (req, res) => {
     token,
   });
 };
+
+module.exports = { register, login };
