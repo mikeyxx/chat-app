@@ -22,8 +22,13 @@ const Feeds = () => {
   const handlePhotoAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
-    const picturePath = URL.createObjectURL(file);
-    setPostData({ ...postData, picturePath });
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const picturePath = reader.result as string;
+      setPostData({ ...postData, picturePath });
+    };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
