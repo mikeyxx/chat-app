@@ -85,7 +85,7 @@ const index = () => {
               </div>
               {drop && (
                 <div
-                  className={`logout absolute w-[146px] top-16 left-[${
+                  className={`logout comps absolute w-[146px] top-16 left-[${
                     leftVal + "px"
                   }]`}
                 >
