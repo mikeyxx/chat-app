@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import path from "path";
 import * as expressError from "express-async-errors";
 import multer from "multer";
 import errorHandlerMiddleWare from "./middleware/errorHandler.js";
@@ -42,6 +43,11 @@ app.post("/posts", authorized, upload.single("picturePath"), createPost);
 app.use("/auth", authRouter);
 app.use("/users", authorized, userRouter);
 app.use("/posts", authorized, postRouter);
+
+app.use(express.static(path.join(__dirname, "./client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+});
 
 app.use(errorHandlerMiddleWare);
 app.use(notFound);

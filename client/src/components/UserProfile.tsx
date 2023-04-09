@@ -12,9 +12,7 @@ interface Props {
 }
 
 const UserProfile = ({ userId }: Props) => {
-  const { mode, token, userProfileData } = useAppSelector(
-    (state) => state.users
-  );
+  const { token, userProfileData } = useAppSelector((state) => state.users);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   const dispatch = useAppDispatch();
@@ -30,14 +28,11 @@ const UserProfile = ({ userId }: Props) => {
 
   const getUserProfile = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3003/users/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await axios.get(`/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(setUserProfile(data));
     } catch (error: any) {
       console.error(error.message);

@@ -23,7 +23,7 @@ const LoginComp = () => {
     e.preventDefault();
     const { userName, password } = userData;
     try {
-      const { data } = await axios.post("http://localhost:3003/auth/login", {
+      const { data } = await axios.post("/auth/login", {
         userName,
         password,
       });
@@ -50,8 +50,8 @@ const LoginComp = () => {
   };
 
   return (
-    <div className="pt-28">
-      <div className=" comps flex items-center justify-center  max-w-xl m-auto rounded-xl ">
+    <div className="pt-28  px-2">
+      <div className=" comps flex items-center justify-center  max-w-xl m-auto rounded-xl">
         <div className="w-full p-4">
           <h1 className="mt-4 mb-6">ChirpChat! Keep the Conversation Going.</h1>
           <form className="w-full flex flex-col lg-gap" onSubmit={handleSubmit}>

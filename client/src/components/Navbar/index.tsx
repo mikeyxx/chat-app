@@ -70,11 +70,11 @@ const index = () => {
                 </div>
               )}
             </div>
-            <div
-              className={`flex items-center ${
-                screenSize < 700 ? "sm-gap" : "lg-gap"
-              }`}
-            >
+            <div className={`flex items-cente lg-gap`}>
+              <div>
+                <DarkMode />
+              </div>
+
               <div
                 className="flex bg-slate-200 items-center w-24 justify-between px-2 cursor-pointer rounded text-black"
                 ref={divRef}
@@ -85,12 +85,13 @@ const index = () => {
               </div>
               {drop && (
                 <div
-                  className={`logout absolute top-16 left-[${leftVal + "px"}]`}
+                  className={`logout absolute w-[146px] top-16 left-[${
+                    leftVal + "px"
+                  }]`}
                 >
                   <div
-                    className={`flex items-center justify-between w-full border-b-2`}
+                    className={`flex items-center justify-around w-full border-b-2`}
                   >
-                    <DarkMode />
                     <MdMessage className="cursor-pointer" />
                     <IoMdNotifications className="cursor-pointer" />
                   </div>

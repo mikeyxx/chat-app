@@ -4,22 +4,17 @@ import { setFriends } from "../feature/state";
 import { useEffect } from "react";
 
 const FriendsList = () => {
-  const { mode, token, userProfileData } = useAppSelector(
-    (state) => state.users
-  );
+  const { token, userProfileData } = useAppSelector((state) => state.users);
   const _id = useAppSelector((state) => state.users.userProfileData?._id);
   const dispatch = useAppDispatch();
 
   const getFriends = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3003/users/${_id}/friends`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await axios.get(`/users/${_id}/friends`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(setFriends({ friends: data }));
     } catch (error: any) {
       console.log(error.message);

@@ -46,15 +46,11 @@ const Posts = ({ post }: Props) => {
 
   const addOrRemoveNewFriends = async (friendId: string) => {
     try {
-      const { data } = await axios.patch(
-        `http://localhost:3003/users/${_id}/${friendId}`,
-        val,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await axios.patch(`/users/${_id}/${friendId}`, val, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(setFriends({ friends: data }));
     } catch (error: any) {
       console.log(error.message);
@@ -64,7 +60,7 @@ const Posts = ({ post }: Props) => {
   const setLikes = async () => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:3003/posts/${post._id}/like`,
+        `/posts/${post._id}/like`,
         {
           body: JSON.stringify({ userId: userProfileData?._id }),
         },

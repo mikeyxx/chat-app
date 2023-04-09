@@ -44,10 +44,7 @@ const RegisterComp = () => {
       formData.append("location", userData.location);
       formData.append("bio", userData.bio);
 
-      const { data } = await axios.post(
-        "http://localhost:3003/auth/register/",
-        formData
-      );
+      const { data } = await axios.post("/auth/register/", formData);
       dispatch(setIsRegistered());
     } catch (error: any) {
       console.log(error.message);
@@ -55,7 +52,7 @@ const RegisterComp = () => {
   };
 
   return (
-    <div className="pt-28">
+    <div className="pt-28  px-2">
       <div className="comps flex items-center justify-center  max-w-xl m-auto rounded-xl mb-3">
         <div className="w-full p-4">
           <h1 className="mt-4 mb-6">ChirpChat! Keep the Conversation Going.</h1>

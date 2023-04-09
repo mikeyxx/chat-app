@@ -33,15 +33,11 @@ const Feeds = () => {
       formData.append("description", postData.description);
       formData.append("picturePath", postData.picturePath);
 
-      const { data } = await axios.post(
-        "http://localhost:3003/posts",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await axios.post("/posts", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setPostData({
         description: "",
@@ -54,7 +50,7 @@ const Feeds = () => {
 
   const getPostFeeds = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3003/posts", {
+      const { data } = await axios.get("/posts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
