@@ -77,8 +77,8 @@ const Posts = ({ post }: Props) => {
   };
 
   return (
-    <div className="comps mt-4 flex flex-col w-full rounded-xl p-4">
-      <div className="flex w-full items-center justify-between">
+    <main className="comps mt-4 flex flex-col w-full rounded-xl p-4">
+      <section className="flex w-full items-center justify-between">
         <div className="flex sm-gap">
           <img
             src={post.userPicturePath}
@@ -107,10 +107,10 @@ const Posts = ({ post }: Props) => {
               : "Follow"
             : ""}
         </small>
-      </div>
+      </section>
       <p className="my-4">{post.description}</p>
       <img src={post.picturePath} alt="" className="rounded-xl" />
-      <div className="flex items-center justify-between w-full">
+      <section className="flex items-center justify-between w-full">
         <div className="flex items-center lg-gap mt-2">
           <div className="flex items-center sm-gap">
             <div onClick={setLikes}>
@@ -128,8 +128,8 @@ const Posts = ({ post }: Props) => {
           </div>
         </div>
         <MdOutlineShare className="cursor-pointer" />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

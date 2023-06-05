@@ -26,10 +26,10 @@ const FriendsList = () => {
   }, [userProfileData?.friends.length]);
 
   return (
-    <div className=" comps mt-4 flex flex-col w-full rounded-xl p-4">
+    <main className=" comps mt-4 flex flex-col w-full rounded-xl p-4">
       <h3 className="font-bold">Friends List</h3>
       {userProfileData?.friends.map((friend) => (
-        <div
+        <section
           key={friend._id}
           className="flex w-full items-center justify-between mt-3"
         >
@@ -50,9 +50,9 @@ const FriendsList = () => {
           <small className="text-primary cursor-pointer hover:bg-slate-100 px-3 rounded-xl">
             Following
           </small>
-        </div>
+        </section>
       ))}
-    </div>
+    </main>
   );
 };
 

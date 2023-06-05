@@ -81,8 +81,8 @@ const Feeds = () => {
   }, [screenSize]);
 
   return (
-    <div className="flex flex-col flex-1 grow-[2] max-h-fit h-full mb-3">
-      <div className="comps flex flex-col w-full rounded-xl p-4 items-center justify-between">
+    <main className="flex flex-col flex-1 grow-[2] max-h-fit h-full mb-3">
+      <section className="comps flex flex-col w-full rounded-xl p-4 items-center justify-between">
         <div className="flex items-center justify-between w-full sm-gap">
           <img
             src={userProfileData?.picturePath}
@@ -148,11 +148,11 @@ const Feeds = () => {
             Post
           </button>
         </form>
-      </div>
+      </section>
       {posts.map((post) => (
         <Posts key={post._id} post={post} />
       ))}
-    </div>
+    </main>
   );
 };
 

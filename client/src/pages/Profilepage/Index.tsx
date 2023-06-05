@@ -18,16 +18,16 @@ const Index = () => {
   }, [screenSize]);
 
   return (
-    <div className="pt-24">
-      <div
+    <main className="pt-24">
+      <section
         className={`flex ${
           screenSize <= 700 ? "flex-col" : "flex-row"
         } max-w-[1000px] w-full m-auto justify-between lg-gap px-2`}
       >
         <UserProfile userId={userId} />
         <SinglePost />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

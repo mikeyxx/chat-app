@@ -16,12 +16,12 @@ const Ads = () => {
   }, [screenSize]);
 
   return (
-    <div
+    <main
       className={`flex flex-col ${
         screenSize > 920 && "max-w-[390px]"
       } w-full  max-h-fit h-full`}
     >
-      <div className="comps rounded-xl flex flex-col p-4 items-center justify-between">
+      <section className="comps rounded-xl flex flex-col p-4 items-center justify-between">
         <div className="flex justify-between items-center w-full">
           <span className="font-bold">Sponsored</span>
           <small className="cursor-pointer hover:bg-slate-100 py-1 px-2 rounded-2xl hover:text-black">
@@ -44,9 +44,9 @@ const Ads = () => {
             brightening and evening out your complexion{" "}
           </small>
         </div>
-      </div>
+      </section>
       <FriendsList />
-    </div>
+    </main>
   );
 };
 

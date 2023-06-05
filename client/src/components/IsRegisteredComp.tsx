@@ -10,7 +10,7 @@ const IsRegisteredComp = () => {
     dispatch(setIsRegistered());
   };
   return (
-    <div>
+    <main>
       <p className="mt-5 mb-2">
         {isRegistered ? "Don't have an account?" : "Have an account"}{" "}
         <span
@@ -20,7 +20,7 @@ const IsRegisteredComp = () => {
           {isRegistered ? "Register" : "Login"}
         </span>
       </p>
-    </div>
+    </main>
   );
 };
 

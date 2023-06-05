@@ -55,12 +55,12 @@ const UserProfile = ({ userId }: Props) => {
 
   return (
     <>
-      <div
+      <main
         className={`comps flex flex-col ${
           screenSize > 920 && "max-w-[390px]"
         } w-full p-4 rounded-xl max-h-fit h-full`}
       >
-        <div className="flex w-full items-center justify-between">
+        <section className="flex w-full items-center justify-between">
           <div className="flex sm-gap">
             <img
               src={userProfileData?.picturePath}
@@ -78,28 +78,28 @@ const UserProfile = ({ userId }: Props) => {
             </div>
           </div>
           <MdPersonAddAlt className="hover:bg-slate-100 rounded-xl cursor-pointer w-6 h-6 p-1" />
-        </div>
+        </section>
         <hr className="inline-block w-full my-5" />
 
-        <div className="flex items-center sm-gap">
+        <section className="flex items-center sm-gap">
           <MdOutlineLocationOn />
           <span>📍 {userProfileData?.location}</span>
-        </div>
-        <div className="flex items-center sm-gap">
+        </section>
+        <section className="flex items-center sm-gap">
           <IoBriefcaseOutline />
           <span>{userProfileData?.bio}</span>
-        </div>
+        </section>
         <hr className="inline-block w-full my-5" />
-        <div className="flex items-center justify-between">
+        <section className="flex items-center justify-between">
           <small>Who's viewed your profile</small>
           <small>{userProfileData?.viewedProfile}</small>
-        </div>
-        <div className="flex items-center justify-between">
+        </section>
+        <section className="flex items-center justify-between">
           <small>Impressions on your posts</small>
           <small>{userProfileData?.impressions}</small>
-        </div>
+        </section>
         <hr className="inline-block w-full my-5" />
-        <div>
+        <section>
           <h3 className="font-bold mb-3">Social Profiles</h3>
           <div className="flex items-center sm-gap">
             <img src={Twitter} alt="" />
@@ -115,8 +115,8 @@ const UserProfile = ({ userId }: Props) => {
               <small>Networking Platform</small>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 };

@@ -24,8 +24,8 @@ const SinglePost = () => {
   };
 
   return (
-    <div className="comps flex flex-col w-full max-h-fit h-full rounded-xl p-4">
-      <div className="flex w-full items-center justify-between">
+    <main className="comps flex flex-col w-full max-h-fit h-full rounded-xl p-4">
+      <section className="flex w-full items-center justify-between">
         <div className="flex sm-gap">
           <img
             src={post?.userPicturePath}
@@ -40,10 +40,10 @@ const SinglePost = () => {
             <small>{post?.location}</small>
           </div>
         </div>
-      </div>
+      </section>
       <p className="my-4">{post?.description}</p>
       <img src={post?.picturePath} alt="" className="rounded-xl" />
-      <div className="flex items-center justify-between w-full">
+      <section className="flex items-center justify-between w-full">
         <div className="flex items-center lg-gap mt-2">
           <div className="flex items-center sm-gap">
             <div>
@@ -61,8 +61,8 @@ const SinglePost = () => {
           </div>
         </div>
         <MdOutlineShare className="cursor-pointer" />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

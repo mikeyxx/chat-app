@@ -50,9 +50,9 @@ const index = () => {
   return (
     <>
       {token ? (
-        <div className="comps max-w-full h-20 w-full fixed z-50 flex items-center">
+        <nav className="comps max-w-full h-20 w-full fixed z-50 flex items-center">
           <div className="flex max-w-[1400px] items-center justify-between w-full m-auto px-2">
-            <div className="flex items-center lg-gap">
+            <section className="flex items-center lg-gap">
               <div className="flex items-center">
                 <span className="text-primary font-bold text-3xl">
                   ChirpChat
@@ -69,8 +69,8 @@ const index = () => {
                   <IoSearch />
                 </div>
               )}
-            </div>
-            <div className={`flex items-cente lg-gap`}>
+            </section>
+            <section className={`flex items-cente lg-gap`}>
               <div>
                 <DarkMode />
               </div>
@@ -96,21 +96,21 @@ const index = () => {
                     <IoMdNotifications className="cursor-pointer" />
                   </div>
 
-                  <span
+                  <button
                     className="cursor-pointer border-b-2 w-full"
                     onClick={handleHomeBtnClick}
                   >
                     Home
-                  </span>
+                  </button>
 
-                  <span className="cursor-pointer" onClick={handleLogout}>
+                  <button className="cursor-pointer" onClick={handleLogout}>
                     Log out
-                  </span>
+                  </button>
                 </div>
               )}
-            </div>
+            </section>
           </div>
-        </div>
+        </nav>
       ) : (
         <div className="comps max-w-full h-20 w-full m-auto flex items-center justify-center fixed z-50">
           <div className="flex">

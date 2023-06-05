@@ -57,8 +57,8 @@ const RegisterComp = () => {
   };
 
   return (
-    <div className="pt-28  px-2">
-      <div className="comps flex items-center justify-center  max-w-xl m-auto rounded-xl mb-3">
+    <main className="pt-28  px-2">
+      <section className="comps flex items-center justify-center  max-w-xl m-auto rounded-xl mb-3">
         <div className="w-full p-4">
           <h1 className="mt-4 mb-6">ChirpChat! Keep the Conversation Going.</h1>
           <form
@@ -143,8 +143,8 @@ const RegisterComp = () => {
 
           <IsRegisteredComp />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

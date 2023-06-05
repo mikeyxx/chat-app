@@ -19,21 +19,21 @@ const Index = () => {
   }, [screenSize]);
 
   return (
-    <div className="pt-24 pb-3 overflow-x-hidden px-2">
+    <main className="pt-24 pb-3 overflow-x-hidden px-2">
       {screenSize >= 920 ? (
-        <div className="flex max-w-[1400px] w-full m-auto justify-between lg-gap">
+        <section className="flex max-w-[1400px] w-full m-auto justify-between lg-gap">
           <UserProfile userId={userProfileData?._id} />
           <Feeds />
           <Ads />
-        </div>
+        </section>
       ) : (
-        <div className="flex flex-col w-full m-auto justify-between sm-gap overflow-x-hidden">
+        <section className="flex flex-col w-full m-auto justify-between sm-gap overflow-x-hidden">
           <UserProfile userId={userProfileData?._id} />
           <Feeds />
           <Ads />
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 };
 
