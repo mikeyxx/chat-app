@@ -23,7 +23,7 @@ const LoginComp = () => {
     e.preventDefault();
     const { userName, password } = userData;
     try {
-      const { data } = await axios.post("http://localhost:3003/auth/login", {
+      const { data } = await axios.post("/auth/login", {
         userName,
         password,
       });
