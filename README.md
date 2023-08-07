@@ -34,6 +34,8 @@ ChirpChat is a social media application that allows users to connect with their 
 
 Not only can you create your own posts, but you can also like and view other users' posts with ease. Whether you're sharing a funny meme, a thought-provoking article, or just updating your friends on your latest adventures, ChirpChat makes it easy to stay connected and engaged..
 
+**Please Note: The database for this project is hosted on a free Mongo Atlas tier so it may take a few minutes to load and display all data on the initial start**
+
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 
